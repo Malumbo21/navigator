@@ -12,8 +12,7 @@ A simple JavaFX router to switch between application scenes
 Get latest release [here](https://github.com/Marcotrombino/Navigator/releases/latest)
 
 ## Supported versions
-- 0.0.x - Support for Java 9
-- master (1.0.x) - Support for Java 8
+- Java 17+ 
 ### Advantages
 You can switch between your scenes from <b>anywhere</b> through a simple method, without worrying about annoying Stage settings.
 
@@ -45,14 +44,14 @@ Navigator.when("login", "myloginscreen.fxml", "My login screen", 1000, 500);
 ```
 
 ##### You can optionally specify the sub routes with and without title and size (width, height):
+## /product is a borderpane and has its center replaced by its child routes
 ```java
 
-Navigator.when(new Route.Nested("/product"){{
-    when("/","view-product.fxml","View Product",1024,768);
-    when("/edit-product","edit-product.fxml");
-    when("/create-product","create-product.fxml","Create Product");
-    when("/report","product-report.fxml",1024,768);
-}});
+Navigator.when(parent("layout", "com/eden/navigatorfx/ui/layout.fxml")
+                .when("layout_one", "com/eden/navigatorfx/ui/l_1.fxml")
+                .when("layout_two", "com/eden/navigatorfx/ui/l_2.fxml")
+                .when("layout_three", "com/eden/navigatorfx/ui/l_3.fxml")
+);
 
 ```
 ### 3. Switch
@@ -114,15 +113,26 @@ package sample;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import sample.Navigator;                                 // import Navigator
+import com.eden.navigatorfx.routing.utils.NavigationTransition;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
     
-        Navigator.bind(this, primaryStage, "Hello World", 300, 275);    // bind Navigator
-        Navigator.when("firstPage", "sample.fxml");                     // set "firstPage" route
-        Navigator.navigateTo("firstPage");                                    // switch to "sample.fxml"
+        Navigator.bind(this, stage, "Navigation FX", 600, 400);
+        Navigator.when("home", "com/eden/navigatorfx/ui/home.fxml");
+        Navigator.when("second", "com/eden/navigatorfx/ui/second.fxml");
+        Navigator.when(parent("layout", "com/eden/navigatorfx/ui/layout.fxml")
+                        .when("layout_one", "com/eden/navigatorfx/ui/l_1.fxml")
+                        .when("layout_two", "com/eden/navigatorfx/ui/l_2.fxml")
+                        .when("layout_three", "com/eden/navigatorfx/ui/l_3.fxml")
+        );
+        Navigator.setAnimationType(NavigationTransition.FADE, 300);
+
+        Application.setUserAgentStylesheet(new PrimerDark().getUserAgentStylesheet());
+        CSSFX.start();
+        Navigator.start("home");
     }
 
 
@@ -139,7 +149,7 @@ Navigator.setAnimationType("fade");
 ```
 ##### You can optionally specify the animation duration (ms):
 ```java
-Navigator.setAnimationType("fade", 1200);
+Navigator.setAnimationType(NavigationTransition.FADE, 300);
 ```
 #### animationType
 | AnimationType  | Default duration |
