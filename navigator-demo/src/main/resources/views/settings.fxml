@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox fx:controller="com.eden.navigatordemo.controllers.SettingsController"
+      xmlns:fx="http://javafx.com/fxml" alignment="CENTER" spacing="10">
+    <Label text="Settings" styleClass="header-label"/>
+    <Button text="Close" onAction="#closeDialog"/>
+</VBox>

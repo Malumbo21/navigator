@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane fx:controller="com.eden.navigatordemo.controllers.AdminController"
+            xmlns:fx="http://javafx.com/fxml">
+    <top>
+        <Button text="Back" onAction="#back"/>
+    </top>
+    <center>
+        <Label text="Admin Panel" styleClass="header-label"/>
+    </center>
+</BorderPane>

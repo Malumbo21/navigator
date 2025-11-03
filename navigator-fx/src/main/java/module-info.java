@@ -1,4 +1,4 @@
-module com.eden.navigatorfx {
+module eden.navigatorfx {
     requires javafx.controls;
     requires javafx.fxml;
     requires atlantafx.base;
@@ -16,4 +16,6 @@ module com.eden.navigatorfx {
 
     exports com.eden.navigatorfx.routing.utils;
     opens com.eden.navigatorfx.routing.utils to javafx.fxml;
+    exports com.eden.navigatorfx.v2;
+    exports com.eden.navigatorfx.v2.layout;
 }
